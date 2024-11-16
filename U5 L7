@@ -1,0 +1,27 @@
+import java.util.Scanner;
+
+public class IntegerInputExample {
+  public static void main(String[] args) {
+    Scanner kb = new Scanner(System.in);
+
+    try {
+      System.out.print("Enter the first number (a): ");
+      double a = kb.nextDouble();
+
+      System.out.print("Enter the second number (b): ");
+      double b = kb.nextDouble();
+
+      if (b == 0) {
+        System.out.println("Error: Division by zero is not allowed.");
+      } else {
+        double result = a / b;
+        System.out.printf("The result of a / b is: %.2f%n", result);
+      }
+
+    } catch (java.util.InputMismatchException e) {
+      System.out.println("Bad input: Please enter valid numbers.");
+    } finally {
+      System.out.println("Program execution complete.");
+    }
+  }
+}
