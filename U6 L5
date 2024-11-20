@@ -1,0 +1,18 @@
+import java.util.Scanner;
+
+import java.util.Scanner;
+
+class Calc {
+   public static void main(String [] args) {
+      Scanner kb = new Scanner(System.in);
+      int n = 1;
+      double fac = 1;
+      System.out.print("Enter a number for factorial: ");
+      int max = kb.nextInt();
+      while (n <= max) {
+         fac = fac * n;
+         n = n + 1;
+      }
+      System.out.printf("%s\n", fac);
+   }
+}
