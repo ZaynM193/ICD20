@@ -1,69 +1,61 @@
 import java.util.Scanner;
 
-public class Assignment2 {
-
-    // Function to generate the Collatz sequence and find the highest value
-    public static void Assignment2(int n) {
-        int highestValue = n;  // Initialize the highest value as the starting number
-        int terms = 1;  // Start with 1 term (the initial number)
-
-        // Print the first number
-        System.out.print(n);
-
-        // Generate the Collatz sequence
-        while (n != 1) {
-            if (n % 2 == 0) {  // If the number is even
-                n = n / 2;
-            } else {  // If the number is odd
-                n = 3 * n + 1;
-            }
-
-            // Print the next number in the sequence
-            System.out.print("; " + n);
-
-            // Update the highest value if necessary
-            if (n > highestValue) {
-                highestValue = n;
-            }
-
-            // Increment the term count
-            terms++;
-        }
-
-        // Display the results
-        System.out.println();
-        System.out.println("Number of terms = " + terms);
-        System.out.println("Highest value reached = " + highestValue);
-    }
-
+public class Assignment2CollatzConjecture {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        boolean continueProgram = true;
 
-        while (true) {
-            // Get user input
+        while (continueProgram) {
+            // Ask for the user's input
             System.out.print("Enter a whole number > 0: ");
-            int n = scanner.nextInt();
+            int n;
 
-            // Check for valid input
-            if (n <= 0) {
-                System.out.println("Please enter a number greater than 0.");
+            // Validation
+            try {
+                n = Integer.parseInt(scanner.nextLine());
+                if (n <= 0) {
+                    System.out.println("Please enter a positive whole number.");
+                    continue;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a positive whole number.");
                 continue;
             }
 
-            // Get the Collatz sequence for the number
-            collatzSequence(n);
+            // declare the variables
+            String sequence = "";
+            int highestValue = n;
+            int terms = 0;
 
-            // Ask if the user wants to do another sequence
-            System.out.print("Do another? (y/n): ");
-            char doAnother = scanner.next().charAt(0);
+            // state the collatz conjecture
+            while (n != 1) {
+                sequence += n + "; "; // Add the current number to the sequence
+                if (n > highestValue) {
+                    highestValue = n; // state the highest value if necessary
+                }
+                if (n % 2 == 0) {
+                    n = n / 2; // If even, divide by 2
+                } else {
+                    n = 3 * n + 1; // If odd, multiply by 3 and add 1
+                }
+                terms++; // add the term count
+            }
+            sequence += "1"; // Add the final 1 to the sequence
+            terms++; // Include the last term:1
 
-            if (doAnother != 'y' && doAnother != 'Y') {
+            System.out.println("The Collatz sequence for n = " + sequence.split(";")[0] + " is: " + sequence);
+            System.out.println("Number of terms = " + terms);
+            System.out.println("Highest value reached = " + highestValue);
+
+            // Ask the user if they want to do another number
+            System.out.print("Do another? (y/n) ");
+            String response = scanner.nextLine().trim().toLowerCase();
+            if (!response.equals("y")) {
+                continueProgram = false;
                 System.out.println("Goodbye!");
-                break;  // Exit the loop if the user doesn't want to continue
             }
         }
 
-        scanner.close();  // Close the scanner to prevent memory leak
+        scanner.close();
     }
 }
-
