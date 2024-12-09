@@ -2,17 +2,21 @@ import java.io.*;
 import java.util.Scanner;
 
 class menu {
-  public static void main(String [] args) {
-  	Scanner kb = new Scanner(System.in);
-  	String a = "a";
-  	String b = "b";
-  	String c = 'c'
-  	boolean valid = false;
-  	while (! valid) {
-  		System.out.print("Choose a, b or c: ");
-  		choice = kb.nextInt();
-  		valid = ((choice >= 1) && (choice <= 3));
-  	}
-  	System.out.printf("You chose: %d\n", choice);
+  public static void main(String[] args) {
+    Scanner kb = new Scanner(System.in);
+    String choice = "";
+    boolean valid = false;
+
+    while (!valid) {
+      System.out.print("Choose a, b, or c: ");
+      choice = kb.nextLine().trim().toLowerCase(); // Read and normalize input
+      valid = choice.equals("a") || choice.equals("b") || choice.equals("c");
+      
+      if (!valid) {
+        System.out.println("Invalid choice. Please try again.");
+      }
+    }
+
+    System.out.printf("You chose: %s\n", choice);
   }
 }
