@@ -1,0 +1,22 @@
+import java.util.Scanner;
+
+class GuessingGame {
+  public static void main(String[] args) {
+    Scanner kb = new Scanner(System.in);
+    int guess = 0;
+    System.out.println("Guess a number between 1 and 10!");
+
+    while (true) {
+      int randomNumber = (int) (Math.random() * 10) + 1;
+      System.out.print("Enter your guess: ");
+      guess = kb.nextInt();
+
+      if (guess == randomNumber) {
+        System.out.println("Right answer!");
+        break; // Exit the loop on correct guess
+      } else {
+        System.out.println("Incorrect. Try again.");
+      }
+    }
+  }
+}
